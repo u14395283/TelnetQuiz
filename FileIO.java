@@ -14,16 +14,19 @@ public class FileIO {
          Integer count = 0;
          int qCount = 0;
          int aCount = 0;
+         int randNum = 2;
          
          String quest;
          String a1;
          String a2;
          String a3;
          String a4;
+         String ask = "";
          String ans = "";
          
          
-        while(scanIn.hasNextLine()){
+        while(scanIn.hasNextLine()&& (qCount < randNum)){
+        	ask = "";
         	String temp = scanIn.nextLine();
         	StringBuilder sb = new StringBuilder(temp);
         	ans = "";
@@ -33,7 +36,7 @@ public class FileIO {
 			sb.deleteCharAt(0);
 			sb.append('?');
 			quest = sb.toString();
-			System.out.println(quest);
+			ask += quest+"\n";
         	
          for(int i = 0; i < 4; i++){
         	 temp = scanIn.nextLine();
@@ -47,16 +50,16 @@ public class FileIO {
     		 sb.reverse();
     		 sb.append(")"+count);
     		 sb.reverse();    		 
-    		 System.out.println(sb);
+    		 ask += sb+"\n";
          }
          if(aCount == 4){
-        	 System.out.println("5)All of the above");
+        	 ask += "5)All of the above\n";
          }
          else if(aCount == 0){
-        	 System.out.println("5)None of the above");
+        	 ask += "5)None of the above\n";
          }
-         System.out.println("\n"+ans+"\n");
       }
+        System.out.println(ask);
       }finally {
          if (fileIn != null) {
             fileIn.close();

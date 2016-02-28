@@ -1,0 +1,20 @@
+?How many countries directly border the United States
+-9
+-1
++2
+-3 
+?Which of these fruits does not grow on trees
+-Mangos
+-Oranges
+-Apples
++Tomatoes
+?Which of these areas of study is considered a member of the family of 'Earth Sciences'
+-Geology
+-Paleontology 
+-Oceanography
+-All of these
+?Which two people Worked on this assignment
+-Mark
++Una
+-Ruan
++JoDan

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class FileIO {
-   public static void main(String args[]) throws IOException
+   public String question() throws IOException
    {
 	   FileReader fileIn = null;
 	   Scanner scanIn = null;
@@ -14,13 +14,16 @@ public class FileIO {
          Integer count = 0;
          int qCount = 0;
          int aCount = 0;
-         int randNum = 2;
+         
+         //Generate Random Number
+         Random rand = new Random();
+         int randNum = rand.nextInt(4);
          
          String quest;
-         String a1;
-         String a2;
-         String a3;
-         String a4;
+        // String a1;
+        // String a2;
+        // String a3;
+        // String a4;
          String ask = "";
          String ans = "";
          
@@ -59,7 +62,7 @@ public class FileIO {
         	 ask += "5)None of the above\n";
          }
       }
-        System.out.println(ask);
+        return ask;
       }finally {
          if (fileIn != null) {
             fileIn.close();

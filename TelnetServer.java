@@ -12,9 +12,6 @@ import java.net.*;
 
 public class TelnetServer implements Runnable {
 	
-	//File IO
-	
-	
 	ServerSocket ss;
 	Socket s;
 	BufferedReader br1;
@@ -24,6 +21,7 @@ public class TelnetServer implements Runnable {
 	Thread t2;
 	String in = "";
 	String out = "";
+	FileIO q = new FileIO();
 
 	public TelnetServer(int port) {
 		try {
@@ -47,15 +45,14 @@ public class TelnetServer implements Runnable {
 	public void run(){
 		try {
 			if(Thread.currentThread().getId() == t1.getId()){
+				String asking = q.question();
 				br1 = new BufferedReader(new InputStreamReader(System.in));
 				pw = new PrintWriter(s.getOutputStream(), true);
-				in = br1.readLine();
-				pw.println(in);
+				pw.println(q.question());
 
-				while(!in.equals("quit") && !in.equals("QUIT") && !in.equals("Quit")){
-					in = br1.readLine();
-					pw.println(in);
-				}
+				while(!in.equals("quit") && !in.equals("QUIT") && !in.equals("Quit"))
+					pw.println(q.question());
+
 			}
 			else {
 				br2 = new BufferedReader(new InputStreamReader(s.getInputStream()));

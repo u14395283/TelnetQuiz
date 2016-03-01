@@ -35,12 +35,22 @@ public class Server
 				input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 				output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 				System.out.println("Client connected...");
+				output.write("Welcome to the silly question place");
+				output.flush();
 			}
 			catch(Exception e)
 			{
 				System.out.println("Failed to create socket");
 			}
-			
+			try 
+			{
+				String get = input.readLine();
+			} 
+			catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

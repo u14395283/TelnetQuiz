@@ -44,26 +44,26 @@ public class TelnetServer implements Runnable {
 
 	public void run(){
 		try {
-			if(Thread.currentThread().getId() == t1.getId()){
-				String asking = q.question();
-				br1 = new BufferedReader(new InputStreamReader(System.in));
-				pw = new PrintWriter(s.getOutputStream(), true);
-				pw.println(q.question());
-
-				while(!in.equals("quit") && !in.equals("QUIT") && !in.equals("Quit"))
-					pw.println(q.question());
-
-			}
-			else {
-				br2 = new BufferedReader(new InputStreamReader(s.getInputStream()));
-				out = "Client 2: " + br2.readLine();
-				System.out.println(out);
-
-				while(!out.equals("Client 2: quit") && !out.equals("Client 2: QUIT") && !out.equals("Client 2: Quit")){
-					out = "Client 2: " +  br2.readLine();
-					System.out.println(out);
+			String asking = q.question();
+			//if(Thread.currentThread().getId() == t1.getId()){
+				pw = new PrintWriter(
+						s.getOutputStream(), true);
+						pw.println(asking);
+			//}
+			//else {
+				
+				do{
+					br2 = new BufferedReader(new InputStreamReader(s.getInputStream()));
+					out = br2.readLine();
+					String a = q.answers();
+					
+					if(a.contains(out)){
+						pw = new PrintWriter(s.getOutputStream(), true);
+						pw.println("Congratulations!");
+					}
 				}
-			}
+				while(!out.equals("quit") && !out.equals("QUIT") && !out.equals("Quit"));
+			//}
 		}
 		catch(Exception e){
 			System.out.println("***Chat error occured!***");

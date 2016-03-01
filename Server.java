@@ -31,25 +31,40 @@ public class Server
 			try
 			{
 				Socket client = servSock.accept();
+				FileIO q = new FileIO();
 				
-				input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-				output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-				System.out.println("Client connected...");
-				output.write("Welcome to the silly question place");
-				output.flush();
+				while(true){	
+					input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+					output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+					System.out.println("Client connected...");
+					output.write(q.question());
+					output.flush();
+					
+					String answer = q.answers();
+					
+					String get = input.readLine().trim();
+					char test = get.charAt(get.length() - 1);
+					System.out.println(get + "lol");
+					
+					if(answer.charAt(0)== test){
+						output.write("Congrats!\n Try again? (yes/no)");
+					}
+					else {
+						output.write("Sorry. The answer was: "+answer+"\n Try again? (yes/no)");
+					}
+					
+					output.flush();
+					get = input.readLine();
+					
+					if(get.equals("no")){
+						quit = true;
+						break;
+					}
+				}
 			}
 			catch(Exception e)
 			{
 				System.out.println("Failed to create socket");
-			}
-			try 
-			{
-				String get = input.readLine();
-			} 
-			catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}

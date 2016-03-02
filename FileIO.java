@@ -15,7 +15,7 @@ public class FileIO {
    {
       try {
    	 
-         fileIn = new FileReader("C:/Users/JoDan/workspace/332_P2/src/questions.txt");
+         fileIn = new FileReader("questions.txt");
          scanIn = new Scanner(fileIn);
          Integer count = 0;
          int qCount = 0;

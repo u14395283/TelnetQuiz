@@ -4,19 +4,26 @@ public class Colour
 	{
 		if(col.toLowerCase() == "red")
 		{
-			return ("\033[31m " + text );
-			System.out.println("\033[31;1m Hello \033[0m, \033[32;1;2mworld!\033[0m");
-    		System.out.println("\033[31mRed\033[32m,] Green\033[33m, Yellow\033[34m, Blue\033[0m");
+			return ("\033[31m " + text + "\033[0m");
 		}
 
 		if(col.toLowerCase() == "blue")
 		{
-			return ("\033[34m " + text);
+			return ("\033[34m " + text + "\033[0m");
 		}
 
 		if(col.toLowerCase() == "green")
 		{
-			return ("\033")
+			return ("\033[32m" + text + "\033[0m");
 		}
+		if(col.toLowerCase() == "yellow")
+		{
+			return ("\033[33m" + text + "\033[0m");
+		}
+		if(col.toLowerCase() == "clear")
+		{
+			return ("\033[2J");
+		}
+		return text;
 	}
 }

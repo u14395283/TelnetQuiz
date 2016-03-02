@@ -8,15 +8,16 @@ public class Server
 	
 	public static void main(String[] args)
 	{
+		Colour c = new Colour();
 		try 
 		{
 			servSock = new ServerSocket(Integer.parseInt(args[0]));
-			System.out.println("Server is now running...");
+			System.out.println(c.colour("blue","Server is now running..."));
 		} 
 		catch (NumberFormatException e1) 
 		{
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println(c.colour("red","Error: Could not create ServerSocket!"));
 		} 
 		catch (IOException e1) 
 		{
@@ -33,24 +34,26 @@ public class Server
 				Socket client = servSock.accept();
 				FileIO q = new FileIO();
 				
-				while(true){	
+				while(true)
+				{	
 					input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 					output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-					System.out.println("Client connected...");
-					output.write(q.question());
+					System.out.println(c.colour("green","Client connected..."));
+					output.write(c.colour("yellow",q.question()));
 					output.flush();
 					
 					String answer = q.answers();
 					
 					String get = input.readLine().trim();
 					char test = get.charAt(get.length() - 1);
-					System.out.println(get + "lol");
+					System.out.println("Client response: " + get);
 					
-					if(answer.charAt(0)== test){
-						output.write("Congrats!\n Try again? (yes/no)");
+					if(answer.charAt(0)== test)
+					{
+						output.write(c.colour("green","Congrats!\n Try again? (yes/no): "));
 					}
 					else {
-						output.write("Sorry. The answer was: "+answer+"\n Try again? (yes/no)");
+						output.write(c.colour("red","Sorry. The answer was: "+answer+"\n Try again? (yes/no): "));
 					}
 					
 					output.flush();
@@ -64,7 +67,7 @@ public class Server
 			}
 			catch(Exception e)
 			{
-				System.out.println("Failed to create socket");
+				System.out.println(c.colour("red","Failed to create socket"));
 			}
 		}
 	}

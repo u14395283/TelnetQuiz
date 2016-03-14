@@ -31,7 +31,7 @@ public class QuizServer extends Thread
         		PrintWriter out = new PrintWriter(socket.getOutputStream());            
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String line = "";
-                Random rand = new Random();
+//                Random rand = new Random();
 
                 //Get request from client
                 int length = -1;
@@ -59,7 +59,7 @@ public class QuizServer extends Thread
                     //check if correct, ask to continue
                     reply = header;
 
-                    if (request.indexOf("answer=true") > -1)
+                    if (request.indexOf("answer=" + q.answers()) > -1)
                     {
                         reply += "<h1 style='color: green'>That's right!</h1>";
                     }
@@ -80,28 +80,15 @@ public class QuizServer extends Thread
                     {
                         quit = true;
                     }
-                    
-                    int n = rand.nextInt(4);
-            
+                                
                     //generate page
                     reply = header;
                     reply += "<p>" + q.question() + "</p><br/>";    
                     int cnt = 4;
                     if(q.add())
                     	cnt = 5;
-
-
-                   	 for (int i = 1; i <= cnt; i++)
-                        {
-                            reply += "<input type='radio' name='answer' value='";
-                            if(i == q.answers())
-                            	reply += true;
-                            else
-                            	reply += false;
-
-                            reply += "'> " + i + " </input> <br>";
-                        }
-
+                   	
+                    reply += "Answer: <br /><input type='textbox' name='answer' value=''></input> <br />";
                     reply += "<input type='submit' value='submit'></form></body></html>";
 
                    
